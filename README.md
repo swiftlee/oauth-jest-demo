@@ -1,5 +1,13 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+TO GET YOUR Google OAuth credentials:
+- Go here: https://console.developers.google.com/?pli=1
+- Navigate to OAuth consent screen, fill that out
+- Follow this link to add your localhost as a top-level domain: https://ktor.io/quickstart/guides/oauth.html
+- Select "Credentials" from the menu and fill it out
+- Once you get to "Authorized redirect URIs" make sure it's in this format: http://your.domain.com/api/oauth2/callback
+- Copy and paste your client_id and secret into a config.
+
 ## Available Scripts
 
 In the project directory, you can run:
