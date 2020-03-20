@@ -47,7 +47,7 @@ passport.use(new GoogleStrategy(
         callbackURL: "http://127.0.0.1:5000/api/oauth2/callback",
         passReqToCallback: true
     },
-    (request, accessToken, refreshToken, profile, done) => {
+    (request, accessToken, refreshToken, profile, done) => { // if we authenticated, we verify the user exists, if not, we create them and store in the database
         User.findOneOrCreate({oauthID: profile.id, name: profile.displayName}, (err, user) => {
             return done(err, user);
         })
