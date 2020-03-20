@@ -10,12 +10,15 @@ import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import mongoose from 'mongoose';
 import connectMongo from 'connect-mongo';
+import cors from 'cors';
 
 const MongoStore = connectMongo(session);
 mongoose.connect(config.DB_URI, {
     useUnifiedTopology: true
 });
 const app = express();
+
+app.use(cors());
 
 // allows for cookie assignment
 app.use(cookieParser());
