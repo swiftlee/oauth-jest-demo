@@ -1,0 +1,33 @@
+{
+  "name": "server",
+  "version": "0.1.0",
+  "description": "Backend for student OAuth and Jest demo.",
+  "main": "server.js",
+  "type": "module",
+  "contributors": [
+    {
+      "name": "Jonathan Conlin",
+      "email": "jconlin@ufl.edu",
+      "url": "https://jonconlin.codes"
+    }
+  ],
+  "scripts": {
+    "test": "jest",
+    "start": "nodemon server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "passport-google-oauth2": "^0.2.0",
+    "passport-jwt": "^4.0.0",
+    "body-parser": "^1.19.0",
+    "morgan": "^1.9.1",
+    "mongoose": "^5.9.5",
+    "passport": "^0.4.1"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^25.1.0",
+    "jest-esm-transformer": "^1.0.0"
+  }
+}
