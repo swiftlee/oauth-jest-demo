@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 // import App from './App';
 import * as serviceWorker from './serviceWorker'
@@ -12,12 +12,16 @@ import Home from './views/Home';
 import './App.css';
 import './css/tailwind.css';
 import Login from './views/Login';
+import Account from './views/Account';
 
 const App = () => {
+    const [auth, setAuth] = useState(false);
+    const [user, setUser] = useState({});
+
     return (
         <Router>
             <div>
-                <NavBar/>
+                <NavBar auth={auth}/>
 
                 {/*
           A <Switch> looks through all its children <Route>
@@ -29,10 +33,10 @@ const App = () => {
                 <Switch>
                     <Route exact path="/" component={Home}/>
                     <Route exact path="/login">
-                        <Login/>
+                        <Login auth={auth}/>
                     </Route>
                     <Route exact path="/account">
-                        <Home/>
+                        <Account auth={auth} setAuth={setAuth} user={user} setUser={setUser}/>
                     </Route>
                 </Switch>
             </div>
@@ -40,7 +44,7 @@ const App = () => {
     );
 };
 
-const NavBar = () => {
+const NavBar = (props) => {
     return (
         <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-6">
             <div className="flex items-center flex-shrink-0 text-white mr-6">
@@ -65,18 +69,14 @@ const NavBar = () => {
                     <Link to='/' className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
                         Home
                     </Link>
-                    <a href="#responsive-header"
-                       className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
-                        Examples
-                    </a>
-                    <a href="#responsive-header"
-                       className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white">
-                        Blog
-                    </a>
+                    {props.auth ? <Link to='/account' className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                        Profile
+                    </Link> : null}
                 </div>
                 <div>
-                    <Link to='/login'
-                       className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Login</Link>
+                    {!props.auth ? <Link to='/login'
+                       className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Login</Link> : <a href='http://localhost:5000/api/oauth2/logout'
+                                                                                                                                                                                                                    className="cursor-pointer inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Logout</a>}
                 </div>
             </div>
         </nav>

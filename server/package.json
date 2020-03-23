@@ -29,6 +29,5 @@
     "connect-mongo": "^3.2.0",
     "cors": "^2.8.5"
   },
-  "license": "MIT",
-  "proxy": "http://localhost:3000"
+  "license": "MIT"
 }

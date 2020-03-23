@@ -10,16 +10,12 @@ import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import mongoose from 'mongoose';
 import connectMongo from 'connect-mongo';
-import cors from 'cors';
 
 const MongoStore = connectMongo(session);
 mongoose.connect(config.DB_URI, {
     useUnifiedTopology: true
 });
 const app = express();
-
-app.use(cors());
-
 // allows for cookie assignment
 app.use(cookieParser());
 // setup sessions for all requests, this is only a MemoryStore... never use this in production
@@ -28,7 +24,8 @@ app.use(session({
     secret: 'this_is_a_secret',
     resave: false,
     saveUninitialized: true,
-    store: new MongoStore({mongooseConnection: mongoose.connection}) // this is used for persistent session store
+    store: new MongoStore({mongooseConnection: mongoose.connection}) // this is used for persistent session store,
+
 }));
 
 // morgan used for logging HTTP requests to the console
@@ -47,11 +44,11 @@ passport.use(new GoogleStrategy(
     {
         clientID: config.GOOGLE_CLIENT_ID,
         clientSecret: config.CLIENT_SECRET,
-        callbackURL: "http://127.0.0.1:5000/api/oauth2/callback",
+        callbackURL: "http://localhost:5000/api/oauth2/callback",
         passReqToCallback: true
     },
     (request, accessToken, refreshToken, profile, done) => { // if we authenticated, we verify the user exists, if not, we create them and store in the database
-        User.findOneOrCreate({oauthID: profile.id, name: profile.displayName}, (err, user) => {
+        User.findOneOrCreate(profile, (err, user) => {
             return done(err, user);
         })
     }
@@ -63,13 +60,12 @@ const ensureAuthenticated = (req, res, next) => {
     if (req.isAuthenticated()) {
         return next();
     }
-    res.redirect('/login');
+    res.json({authFailure: true});
 };
 
 app.get('/account', ensureAuthenticated, (req, res) => {
     console.log('USER', req.user);
     User.findOne({_id: req.user}, (err, user) => {
-        console.log('whatever', {user: user});
         if (err)
             console.log(err);
         else
@@ -82,6 +78,10 @@ app.get('/account', ensureAuthenticated, (req, res) => {
 passport.serializeUser((user, done) => {
     done(null, user);
 });
+
+// const name = { name: 'Jon'}
+// const serializedName = serialize(name); --> 01101101010101010101 1010 10 10 1010 01 01
+// const deserializeName = deserialize(name); --> {name: 'Jon'}
 // done function takes care of supplying user credentials after user is authenticated successfully
 // e.g. the function attaches the user object to the request object so you can do "req.user"
 // more on the done function: https://stackoverflow.com/questions/32153865/what-is-done-callback-function-in-passport-strategy-configure-use-function
