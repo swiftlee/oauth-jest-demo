@@ -13,6 +13,7 @@ import './App.css';
 import './css/tailwind.css';
 import Login from './views/Login';
 import Account from './views/Account';
+import Game from "./views/Game";
 
 const App = () => {
     const [auth, setAuth] = useState(false);
@@ -37,6 +38,9 @@ const App = () => {
                     </Route>
                     <Route exact path="/account">
                         <Account auth={auth} setAuth={setAuth} user={user} setUser={setUser}/>
+                    </Route>
+                    <Route exact path='/game'>
+                        <Game auth={auth} setAuth={setAuth} user={user} setUser={setUser}/>
                     </Route>
                 </Switch>
             </div>
@@ -66,17 +70,23 @@ const NavBar = (props) => {
             </div>
             <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
                 <div className="text-sm lg:flex-grow">
-                    <Link to='/' className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                    <Link to='/' onClick={() => console.log(document.cookie)} className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
                         Home
                     </Link>
-                    {props.auth ? <Link to='/account' className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                    {props.auth ? <Link to='/account'
+                                        className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
                         Profile
                     </Link> : null}
+                    <Link to='/game'
+                          className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                        Game
+                    </Link>
                 </div>
                 <div>
                     {!props.auth ? <Link to='/login'
-                       className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Login</Link> : <a href='http://localhost:5000/api/oauth2/logout'
-                                                                                                                                                                                                                    className="cursor-pointer inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Logout</a>}
+                                         className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Login</Link> :
+                        <a href='http://localhost:5000/api/oauth2/logout'
+                           className="cursor-pointer inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Logout</a>}
                 </div>
             </div>
         </nav>
@@ -84,7 +94,7 @@ const NavBar = (props) => {
 };
 
 ReactDOM.render(
-        <App/>,
+    <App/>,
     document.getElementById('root')
 );
 

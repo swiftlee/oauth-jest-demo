@@ -3,17 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.19.2",
+    "node-sass": "^4.13.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.0",
-    "tailwindcss": "^1.2.0",
-	"react-router-dom": "^5.0.0",
     "react-router": "^5.1.2",
-    "node-sass": "^4.13.1",
-    "axios": "^0.19.2"
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "3.4.0",
+    "serialize-javascript": "^3.0.0",
+    "tailwindcss": "^1.2.0"
   },
   "scripts": {
-    "tailwind:css":"tailwind build src/css/tailwind.src.css -o src/css/tailwind.css",
+    "tailwind:css": "tailwind build src/css/tailwind.src.css -o src/css/tailwind.css",
     "start": "yarn run tailwind:css && react-scripts start",
     "build": "yarn run tailwind:css && react-scripts build",
     "test": "react-scripts test",

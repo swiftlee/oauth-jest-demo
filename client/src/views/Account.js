@@ -2,22 +2,24 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import {Redirect} from "react-router";
 
+export async function getUser(props, setRespFinished) {
+    const resp = await axios.get('/account');
+    if (!resp.data.authFailure) {
+        props.setAuth(true);
+        props.setUser(resp.data.user);
+        document.cookie = JSON.stringify(resp.data.user);
+    } else {
+        props.setAuth(false);
+        props.setUser({});
+        document.cookie = null;
+    }
+    setRespFinished(true);
+}
+
 const Account = (props) => {
     const [respFinished, setRespFinished] = useState(false);
     useEffect(() => {
-        async function getUser() {
-            const resp = await axios.get('/account');
-            if (!resp.data.authFailure) {
-                props.setAuth(true);
-                props.setUser(resp.data.user);
-            } else {
-                props.setAuth(false);
-                props.setUser({});
-            }
-            setRespFinished(true);
-        }
-
-        getUser();
+        getUser(props, setRespFinished);
     }, []);
 
     return respFinished ? <User {...props}/> : null;
