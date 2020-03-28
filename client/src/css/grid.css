@@ -1,0 +1,53 @@
+/* CSS Grids... no media queries, holy wow. */
+
+body {
+    padding: 1rem;
+    font-size: 22px;
+}
+
+.card {
+    background-color: dodgerblue;
+    color: white;
+    padding: 1rem;
+    height: 4rem;
+}
+
+/*
+    'rem' is a unit that is relative to font-size.
+     Don't worry about it too much.
+*/
+.cards {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-gap: 1rem;
+}
+
+/* Responsive for larger screens, this creates 2 columns. */
+@media (min-width: 600px) {
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Okay dude, your screen is getting too large. 3 columns, ahoy! */
+@media (min-width: 900px) {
+    .cards { grid-template-columns: repeat(3, 1fr); }
+}
+
+/*
+    But... wait, you said no media queries.
+    ---
+    If we use minmax, we can avoid media queries. It's pretty epic.
+    minxmax() defines a size range greater than or equal to min and less than or equal to max.
+*/
+
+/* Uncomment below for magic */
+/*.cards {
+    max-width: 1200px;
+    !*padding: 100px;*!
+    margin: 0 auto; !* change this to 20px *!
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}*/

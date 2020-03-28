@@ -1,0 +1,197 @@
+/* Media queries: allow us to create CSS rules based on various parameters (viewport size, device type, etc)*/
+/*We can arrange our layout to suit a wide variety of different device / screen sizes */
+
+/*
+    SYNTAX
+    @media <media-type> and (expressions) {}
+
+    e.g.
+    @media TV and (min-width: 1200px) {}
+    "I want this to be effective for TVs only and it must have a minimum width of 1200px"
+    For any device that fits that criteria, we can write CSS to adjust the elements on our page for that screen size.
+
+    @media screen and (max-width: 800px) {}
+    "Anything with a screen that has a maximum width of 800px."
+    For a device with a screen that has a max width of 800px, we can adjust elements.
+*/
+
+/*
+    For testing, change to 320px landscape.
+    The button should show up in the bottom right corner.
+
+    Now change it to landscape.
+    The button should be wider and moved to the left hand corner.
+
+    Now, select iPhoneX and change to landscape.
+    The button should now be in the top-center and stretched.
+
+*/
+
+/* ----------- iPhone 4 and 4S ----------- */
+
+/* Portrait and Landscape */
+@media only screen
+and (min-device-width: 320px)
+and (max-device-width: 480px)
+and (-webkit-min-device-pixel-ratio: 2) {
+    .myButton {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+}
+
+/* Portrait */
+@media only screen
+and (min-device-width: 320px)
+and (max-device-width: 480px)
+and (-webkit-min-device-pixel-ratio: 2)
+and (orientation: portrait) {
+
+}
+
+/* Landscape */
+@media only screen
+and (min-device-width: 320px)
+and (max-device-width: 480px)
+and (-webkit-min-device-pixel-ratio: 2)
+and (orientation: landscape) {
+    .myButton {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 25%;
+    }
+}
+
+/* ----------- iPhone 5, 5S, 5C and 5SE ----------- */
+
+/* Portrait and Landscape */
+/*CHANGE YOUR WIDTH TO 560 TO VIEW CHANGES*/
+@media only screen
+and (min-device-width: 320px)
+and (max-device-width: 568px)
+and (-webkit-min-device-pixel-ratio: 2) {
+}
+
+/* Portrait */
+@media only screen
+and (min-device-width: 320px)
+and (max-device-width: 568px)
+and (-webkit-min-device-pixel-ratio: 2)
+and (orientation: portrait) {
+}
+
+/* Landscape */
+@media only screen
+and (min-device-width: 320px)
+and (max-device-width: 568px)
+and (-webkit-min-device-pixel-ratio: 2)
+and (orientation: landscape) {
+
+}
+
+/* ----------- iPhone 6, 6S, 7 and 8 ----------- */
+
+/* Portrait and Landscape */
+@media only screen
+and (min-device-width: 375px)
+and (max-device-width: 667px)
+and (-webkit-min-device-pixel-ratio: 2) {
+
+}
+
+/* Portrait */
+@media only screen
+and (min-device-width: 375px)
+and (max-device-width: 667px)
+and (-webkit-min-device-pixel-ratio: 2)
+and (orientation: portrait) {
+
+}
+
+/* Landscape */
+@media only screen
+and (min-device-width: 375px)
+and (max-device-width: 667px)
+and (-webkit-min-device-pixel-ratio: 2)
+and (orientation: landscape) {
+
+}
+
+/* ----------- iPhone 6+, 7+ and 8+ ----------- */
+
+/* Portrait and Landscape */
+@media only screen
+and (min-device-width: 414px)
+and (max-device-width: 736px)
+and (-webkit-min-device-pixel-ratio: 3) {
+
+}
+
+/* Portrait */
+@media only screen
+and (min-device-width: 414px)
+and (max-device-width: 736px)
+and (-webkit-min-device-pixel-ratio: 3)
+and (orientation: portrait) {
+
+}
+
+/* Landscape */
+@media only screen
+and (min-device-width: 414px)
+and (max-device-width: 736px)
+and (-webkit-min-device-pixel-ratio: 3)
+and (orientation: landscape) {
+
+}
+
+/* ----------- iPhone X ----------- */
+
+/* Portrait and Landscape */
+@media only screen
+and (min-device-width: 375px)
+and (max-device-width: 812px)
+and (-webkit-min-device-pixel-ratio: 3) {
+}
+
+/* Portrait */
+@media only screen
+and (min-device-width: 375px)
+and (max-device-width: 812px)
+and (-webkit-min-device-pixel-ratio: 3)
+and (orientation: portrait) {
+}
+
+/* Landscape */
+@media only screen
+and (min-device-width: 375px)
+and (max-device-width: 812px)
+and (-webkit-min-device-pixel-ratio: 3)
+and (orientation: landscape) {
+    .myButton {
+        width: 100%;
+        margin: 3vh auto auto; /* this sets the margin-top to 3vh and the rest to auto */
+
+        /*
+            This is shorthand for:
+            margin-top: 3vh;
+            margin-bottom: auto;
+            margin-left: auto;
+            margin-right auto;
+
+            It gets centered because the browser calculates the free space given from the parent element.
+            e.g. if the parent is 100px wide and the child is 50px wide, then the
+            auto property will determine that there is 50px of free space to share between
+            margin-left and margin-right.
+
+            let freeSpace = 100 - 50;
+            let equalShare = freeSpace / 2;
+
+            then:
+            margin-left: 25;
+            margin-right: 25;
+        */
+    }
+}

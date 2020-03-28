@@ -13,7 +13,7 @@ import './App.css';
 import './css/tailwind.css';
 import Login from './views/Login';
 import Account from './views/Account';
-import Game from "./views/Game";
+import Responsive from "./views/Responsive";
 
 const App = () => {
     const [auth, setAuth] = useState(false);
@@ -36,11 +36,11 @@ const App = () => {
                     <Route exact path="/login">
                         <Login auth={auth}/>
                     </Route>
+                    <Route exact path='/responsive'>
+                        <Responsive/>
+                    </Route>
                     <Route exact path="/account">
                         <Account auth={auth} setAuth={setAuth} user={user} setUser={setUser}/>
-                    </Route>
-                    <Route exact path='/game'>
-                        <Game auth={auth} setAuth={setAuth} user={user} setUser={setUser}/>
                     </Route>
                 </Switch>
             </div>
@@ -72,6 +72,9 @@ const NavBar = (props) => {
                 <div className="text-sm lg:flex-grow">
                     <Link to='/' onClick={() => console.log(document.cookie)} className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
                         Home
+                    </Link>
+                    <Link to='/responsive' className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                        Responsive Page
                     </Link>
                     {props.auth ? <Link to='/account'
                                         className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
